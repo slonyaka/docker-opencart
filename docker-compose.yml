@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  web:
+    container_name: opencart_apache
+    build: ./php-apache
+    ports:
+      - 6060:80
+    volumes:
+      - ./www/:/var/www/html/
+      - ./www:/usr/share/nginx/html
+
+  mysql:
+    container_name: opencart_mysql
+    build: ./mysql
+    ports:
+      - 33099:3306
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: opencart
+      MYSQL_USER: root
+      MYSQL_PASSWORD:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
